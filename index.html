@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Độ nhạy lửa chùa VIP - Ngochuu</title>
+    <style>
+        /* Toàn bộ mã CSS chỉnh giao diện VIP */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #0a0a0f 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 520px;
+            width: 100%;
+            background: rgba(22, 22, 40, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 36px;
+            padding: 28px 24px 32px;
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.15), inset 0 1px 0 rgba(255, 215, 0, 0.1);
+        }
+        /* Tiêu đề chính */
+        .title-main {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #ffe066;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            margin-bottom: 6px;
+        }
+        .title-sub {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffb347;
+            background: rgba(255, 215, 0, 0.08);
+            padding: 6px 12px;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 0 auto 18px;
+            border: 1px dashed #ffb347;
+            letter-spacing: 1px;
+        }
+        .device-badge {
+            background: #0f0f1f;
+            border-left: 4px solid #f0c000;
+            padding: 10px 16px;
+            border-radius: 16px;
+            margin: 10px 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            box-shadow: inset 0 0 8px rgba(255, 215, 0, 0.05);
+        }
+        .device-badge span {
+            font-size: 15px;
+            font-weight: 600;
+            color: #d4d4f0;
+        }
+        .device-badge .highlight {
+            color: #ffd966;
+            font-weight: 700;
+        }
+        /* Danh sách thông số */
+        .sense-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 16px 0 20px;
+        }
+        .sense-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(12, 12, 30, 0.7);
+            padding: 10px 18px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            transition: 0.2s;
+        }
+        .sense-item:hover {
+            border-color: #ffd966;
+            background: rgba(30, 30, 60, 0.8);
+        }
+        .sense-label {
+            font-size: 15px;
+            font-weight: 500;
+            color: #c8c8e8;
+            letter-spacing: 0.3px;
+        }
+        .sense-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffe484;
+            background: #1a1a30;
+            padding: 0 16px;
+            border-radius: 40px;
+            line-height: 34px;
+            min-width: 60px;
+            text-align: center;
+            border: 1px solid #3a3a5a;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+        }
+        /* Phần DPI */
+        .dpi-section {
+            background: #121225;
+            border-radius: 28px;
+            padding: 16px 18px;
+            margin: 16px 0 20px;
+            border: 1px solid #2a2a4a;
+        }
+        .dpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .dpi-header label {
+            color: #aab;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .dpi-header .dpi-value {
+            color: #ffe066;
+            font-weight: 800;
+            font-size: 18px;
+            background: #0a0a18;
+            padding: 0 18px;
+            border-radius: 30px;
+            line-height: 32px;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #2a2a5a, #ffd966);
+            outline: none;
+            margin: 6px 0;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffea8a, #e6b800);
+            border: 2px solid #fff4d0;
+            box-shadow: 0 0 20px #ffd96688;
+            cursor: pointer;
+        }
+        /* Các nút chức năng */
+        .action-row {
+            display: flex;
+            gap: 12px;
+            margin: 18px 0 12px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            flex: 1;
+            padding: 14px 8px;
+            border: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.25s;
+            text-transform: uppercase;
+            color: #0b0b14;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ffe066, #f5b800);
+            box-shadow: 0 6px 20px #f5b80055;
+        }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 28px #f5b80088;
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, #4a4a7a, #2a2a5a);
+            color: #d4d4f0;
+            border: 1px solid #6a6a9a;
+        }
+        .btn-secondary:hover {
+            background: #5a5a8a;
+            border-color: #ffd966;
+        }
+        .btn-copy {
+            background: linear-gradient(135deg, #00b894, #00a381);
+            color: #fff;
+            box-shadow: 0 4px 16px #00b89455;
+        }
+        .btn-copy:hover {
+            transform: scale(1.02);
+            background: #00c9a0;
+        }
+        /* Footer */
+        .footer-meta {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 12px;
+            color: #5a5a7a;
+            border-top: 1px solid #2a2a44;
+            padding-top: 16px;
+            letter-spacing: 0.5px;
+        }
+        .footer-meta strong {
+            color: #b0b0d0;
+        }
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container { padding: 20px 16px; }
+            .sense-item { padding: 8px 12px; }
+            .sense-value { font-size: 16px; min-width: 50px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tiêu đề VIP -->
+        <div style="text-align: center;">
+            <div class="title-main">🔥 ĐỘ NHẠY LỬA CHÙA VIP</div>
+            <div class="title-sub">⚡ bản chỉnh tay Ngochuu ⚡</div>
+        </div>
+
+        <!-- Thiết bị -->
+        <div class="device-badge">
+            <span>📱 <span class="highlight">Redmi Note 13 Pro 5G</span></span>
+            <span style="color:#aaa; font-size:13px;">✔️ tối ưu DPI</span>
+        </div>
+
+        <!-- Các thông số độ nhạy (đúng như hình) -->
+        <div class="sense-list">
+            <div class="sense-item">
+                <span class="sense-label">👁️ Nhìn Xung Quanh</span>
+                <span class="sense-value" id="val_xungquanh">122</span>
+            </div>
+            <div class="sense-item">
+                <span class="sense-label">🔴 Red Dot</span>
+                <span class="sense-value" id="val_reddot">142</span>
+            </div>
+            <div class="sense-item">
+                <span class="sense-label">🔭 Ống Ngắm 2X</span>
+                <span class="sense-value" id="val_2x">171</span>
+            </div>
+            <div class="sense-item">
+                <span class="sense-label">🔭 Ống Ngắm 4X</span>
+                <span class="sense-value" id="val_4x">109</span>
+            </div>
+            <div class="sense-item">
+                <span class="sense-label">🎯 Ống Ngắm AWM</span>
+                <span class="sense-value" id="val_awm">152</span>
+            </div>
+            <div class="sense-item">
+                <span class="sense-label">🔄 Nhìn Tự Do</span>
+                <span class="sense-value" id="val_tudo">164</span>
+            </div>
+            <div class="sense-item">
+                <span class="sense-label">📌 Nút Bản</span>
+                <span class="sense-value" id="val_nutban">35%</span>
+            </div>
+        </div>
+
+        <!-- Phần chỉnh DPI (thêm theo yêu cầu) -->
+        <div class="dpi-section">
+            <div class="dpi-header">
+                <label for="dpiSlider">🖥️ Điều chỉnh DPI (độ phân giải ảo)</label>
+                <span class="dpi-value" id="dpiDisplay">440</span>
+            </div>
+            <input type="range" id="dpiSlider" min="300" max="600" value="440" step="1">
+            <div style="display: flex; justify-content: space-between; color:#5a5a7a; font-size:11px; padding:0 6px;">
+                <span>Thấp (300)</span>
+                <span>Mặc định (440)</span>
+                <span>Cao (600)</span>
+            </div>
+        </div>
+
+        <!-- Hàng nút: NHẬN ĐỘ NHẠY + SAO CHÉP TẤT CẢ (đúng yêu cầu) -->
+        <div class="action-row">
+            <button class="btn btn-primary" id="btnApply">📥 NHẬN ĐỘ NHẠY</button>
+            <button class="btn btn-copy" id="btnCopyAll">📋 SAO CHÉP TẤT CẢ</button>
+        </div>
+        <!-- Nút phụ reset (tiện ích) -->
+        <div style="display: flex; gap:8px;">
+            <button class="btn btn-secondary" id="btnReset" style="flex:0 1 auto; padding: 8px 20px; font-size:13px;">↺ Reset mặc định</button>
+            <span style="flex:1; text-align:right; color:#5a5a7a; font-size:12px; align-self:center;">Made by Zeres Device</span>
+        </div>
+
+        <div class="footer-meta">
+            <strong>🔧 Lửa chùa VIP · Ngochuu</strong> — chỉnh DPI &amp; độ nhạy chuẩn
+        </div>
+    </div>
+
+    <script>
+        // Chú thích: toàn bộ script bằng tiếng Việt
+        (function() {
+            // Lấy các phần tử DOM
+            const slider = document.getElementById('dpiSlider');
+            const dpiDisplay = document.getElementById('dpiDisplay');
+            const btnApply = document.getElementById('btnApply');
+            const btnCopy = document.getElementById('btnCopyAll');
+            const btnReset = document.getElementById('btnReset');
+
+            // Danh sách các giá trị độ nhạy mặc định (từ hình)
+            const defaultValues = {
+                xungquanh: 122,
+                reddot: 142,
+                _2x: 171,
+                _4x: 109,
+                awm: 152,
+                tudo: 164,
+                nutban: '35%'
+            };
+
+            // Lưu giá trị hiện tại (để copy)
+            let currentSenses = { ...defaultValues };
+
+            // Hàm cập nhật hiển thị các giá trị từ object
+            function updateDisplayValues(obj) {
+                document.getElementById('val_xungquanh').textContent = obj.xungquanh;
+                document.getElementById('val_reddot').textContent = obj.reddot;
+                document.getElementById('val_2x').textContent = obj._2x;
+                document.getElementById('val_4x').textContent = obj._4x;
+                document.getElementById('val_awm').textContent = obj.awm;
+                document.getElementById('val_tudo').textContent = obj.tudo;
+                document.getElementById('val_nutban').textContent = obj.nutban;
+                // Cập nhật currentSenses
+                currentSenses = { ...obj };
+            }
+
+            // Hàm lấy giá trị từ hiển thị (để copy)
+            function getCurrentValuesFromDisplay() {
+                return {
+                    xungquanh: parseInt(document.getElementById('val_xungquanh').textContent, 10),
+                    reddot: parseInt(document.getElementById('val_reddot').textContent, 10),
+                    _2x: parseInt(document.getElementById('val_2x').textContent, 10),
+                    _4x: parseInt(document.getElementById('val_4x').textContent, 10),
+                    awm: parseInt(document.getElementById('val_awm').textContent, 10),
+                    tudo: parseInt(document.getElementById('val_tudo').textContent, 10),
+                    nutban: document.getElementById('val_nutban').textContent.trim()
+                };
+            }
+
+            // Sự kiện cho thanh trượt DPI: hiển thị giá trị
+            slider.addEventListener('input', function() {
+                dpiDisplay.textContent = this.value;
+            });
+
+            // Nút "NHẬN ĐỘ NHẠY": giả lập áp dụng DPI và hiển thị thông báo (vẫn giữ nguyên giá trị)
+            btnApply.addEventListener('click', function() {
+                const dpi = slider.value;
+                // Mô phỏng áp dụng DPI: hiển thị thông báo ngắn gọn (có thể đổi màu)
+                const oldText = btnApply.textContent;
+                btnApply.textContent = '✅ ĐÃ NHẬN DPI ' + dpi;
+                btnApply.style.background = 'linear-gradient(135deg, #00c9a0, #00a381)';
+                setTimeout(() => {
+                    btnApply.textContent = oldText;
+                    btnApply.style.background = '';
+                }, 1800);
+                // Ghi chú: không thay đổi độ nhạy, chỉ nhận dpi (theo đúng nghĩa)
+            });
+
+            // Nút "SAO CHÉP TẤT CẢ" - copy toàn bộ nội dung dưới dạng văn bản có cấu trúc
+            btnCopy.addEventListener('click', function() {
+                const vals = getCurrentValuesFromDisplay();
+                const dpi = slider.value;
+                // Tạo chuỗi copy giống format trong hình + thêm DPI
+                const copyText = 
+                    `🔥 ĐỘ NHẠY LỬA CHÙA VIP (Ngochuu)\n` +
+                    `Thiết bị: Redmi Note 13 Pro 5G\n` +
+                    `DPI đang áp dụng: ${dpi}\n` +
+                    `--------------------------------\n` +
+                    `- Nhìn Xung Quanh: ${vals.xungquanh}\n` +
+                    `- Red Dot: ${vals.reddot}\n` +
+                    `- Ống Ngắm 2X: ${vals._2x}\n` +
+                    `- Ống Ngắm 4X: ${vals._4x}\n` +
+                    `- Ống Ngắm AWM: ${vals.awm}\n` +
+                    `- Nhìn Tự Do: ${vals.tudo}\n` +
+                    `- Nút Bản: ${vals.nutban}\n` +
+                    `--------------------------------\n` +
+                    `Made by Zeres Device | bản chỉnh sửa bởi Doi`;
+
+                // Dùng Clipboard API
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(copyText).then(() => {
+                        const old = btnCopy.textContent;
+                        btnCopy.textContent = '✅ ĐÃ COPY';
+                        btnCopy.style.background = '#00b894';
+                        setTimeout(() => {
+                            btnCopy.textContent = old;
+                            btnCopy.style.background = '';
+                        }, 1500);
+                    }).catch(() => {
+                        // fallback
+                        copyFallback(copyText);
+                    });
+                } else {
+                    copyFallback(copyText);
+                }
+            });
+
+            // Fallback copy cũ
+            function copyFallback(text) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand('copy');
+                    btnCopy.textContent = '✅ ĐÃ COPY';
+                    setTimeout(() => { btnCopy.textContent = '📋 SAO CHÉP TẤT CẢ'; }, 1500);
+                } catch(e) {
+                    alert('Không thể copy, vui lòng copy thủ công.');
+                }
+                document.body.removeChild(ta);
+            }
+
+            // Reset về giá trị mặc định trong hình
+            btnReset.addEventListener('click', function() {
+                updateDisplayValues(defaultValues);
+                slider.value = 440;
+                dpiDisplay.textContent = '440';
+                // Hiệu ứng
+                btnReset.textContent = '✓ Reset';
+                setTimeout(() => { btnReset.textContent = '↺ Reset mặc định'; }, 1000);
+            });
+
+            // Khởi tạo hiển thị đúng
+            updateDisplayValues(defaultValues);
+            slider.value = 440;
+            dpiDisplay.textContent = '440';
+        })();
+    </script>
+</body>
+</html>
